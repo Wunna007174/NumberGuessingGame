@@ -1,16 +1,18 @@
 package src.com.example.numberGuessingGame.model;
 
 public class Game {
-    private int gameId;
+    private final int gameId;
     private int numberToGuess;
     private int numberOfAttempts;
     private boolean finished;
+    private String difficultyLevel;
 
-    public Game(int gameId, int numberToGuess) {
+    public Game(int gameId, int numberToGuess, String difficultyLevel) {
         this.gameId = gameId;
         this.numberToGuess = numberToGuess;
         this.numberOfAttempts = 0;
         this.finished = false;
+        this.difficultyLevel = difficultyLevel;
     }
 
     public int getGameId() {
@@ -23,6 +25,10 @@ public class Game {
 
     public int getNumberOfAttempts() {
         return numberOfAttempts;
+    }
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
     }
 
     public boolean isFinished() {

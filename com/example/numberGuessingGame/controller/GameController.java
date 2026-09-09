@@ -37,8 +37,16 @@ public class GameController {
     }
 
     public void playGame() {
-        gameService.startNewGame();
-        System.out.println("A new game has started! Try to guess the number between 1 and 100.");
+        String difficultyLevel = difficultyLevelSelection();
+        if (difficultyLevel == "Easy") {
+            System.out.println("You have selected Easy difficulty. Guess a number between 1 and 50.");
+        } else if (difficultyLevel == "Medium") {
+            System.out.println("You have selected Medium difficulty. Guess a number between 1 and 100.");
+        } else if (difficultyLevel == "Hard") {
+            System.out.println("You have selected Hard difficulty. Guess a number between 1 and 200.");
+        }
+
+        gameService.startNewGame(difficultyLevel);
 
         while (true) {
             System.out.print("Enter your guess: ");
@@ -59,5 +67,28 @@ public class GameController {
          System.out.println(" GAME HISTORY"); 
          System.out.println("================================"); 
          gameService.showGames();
+    }
+
+    private String difficultyLevelSelection() {
+        System.out.println("Select difficulty level: ");
+        System.out.println("1. Easy");
+        System.out.println("2. Medium");
+        System.out.println("3. Hard");
+        System.out.print("Enter your choice (1-3): ");
+
+        int choice = scan.nextInt();
+        scan.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                return "Easy";
+            case 2:
+                return "Medium";
+            case 3:
+                return "Hard";
+            default:
+                System.out.println("Invalid choice. Defaulting to Easy.");
+                return "Easy";
+        }
     }
 }

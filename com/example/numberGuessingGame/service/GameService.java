@@ -17,9 +17,18 @@ public class GameService {
         random = new Random();
     }
 
-    public void startNewGame(){
-        int numberToGuess = random.nextInt(100) + 1;
-        game = new Game(gameIdCounter, numberToGuess);
+    public void startNewGame(String difficultyLevel) {
+        int numberToGuess;
+            if (difficultyLevel == "Easy" || difficultyLevel == null || difficultyLevel.isEmpty()) {
+                numberToGuess = random.nextInt(50) + 1;
+            } else if (difficultyLevel == "Medium") {
+                numberToGuess = random.nextInt(100) + 1;
+            } else if (difficultyLevel == "Hard") {
+                numberToGuess = random.nextInt(200) + 1;
+            } else {
+                throw new IllegalArgumentException("Invalid difficulty level: " + difficultyLevel);
+            }
+        game = new Game(gameIdCounter, numberToGuess, difficultyLevel);
         gameRepository.saveGame(game);
         gameIdCounter++;
     }

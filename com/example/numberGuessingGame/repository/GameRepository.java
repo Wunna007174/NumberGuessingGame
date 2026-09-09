@@ -22,7 +22,8 @@ public class GameRepository {
             System.out.println("Game ID: " + game.getGameId() + 
                             ", Finished: " + game.isFinished() +
                             ", Correct Number: " + game.getNumberToGuess() +
-                            ", Attempts: " + game.getNumberOfAttempts());
+                            ", Attempts: " + game.getNumberOfAttempts() +
+                            ", Difficulty Level: " + game.getDifficultyLevel());
         }
     }
 }
