@@ -1,6 +1,6 @@
-package src.com.example.numberGuessingGame;
+package src.main.com.example.numberGuessingGame;
 
-import src.com.example.numberGuessingGame.controller.GameController;
+import src.main.com.example.numberGuessingGame.controller.GameController;
 
 public class Application {
     public static void main(String[] args) {

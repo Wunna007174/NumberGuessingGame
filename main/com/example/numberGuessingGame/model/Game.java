@@ -1,4 +1,4 @@
-package src.com.example.numberGuessingGame.model;
+package src.main.com.example.numberGuessingGame.model;
 
 public class Game {
     private final int gameId;
@@ -6,6 +6,7 @@ public class Game {
     private int numberOfAttempts;
     private boolean finished;
     private DifficultyLevel difficultyLevel;
+    private int maxAttempts;
 
     public enum DifficultyLevel {
         EASY,
@@ -19,15 +20,16 @@ public class Game {
         this.numberOfAttempts = 0;
         this.finished = false;
         this.difficultyLevel = DifficultyLevel.EASY;
+        maxAttempts = 0;
     }
 
-    public Game(int gameId, int numberToGuess, DifficultyLevel difficultyLevel) {
+    public Game(int gameId, int numberToGuess, DifficultyLevel difficultyLevel, int maxAttempts) {
         this.gameId = gameId;
         this.numberToGuess = numberToGuess;
         this.numberOfAttempts = 0;
         this.finished = false;
         this.difficultyLevel = difficultyLevel;
-
+        this.maxAttempts = maxAttempts;
     }
 
     public int getGameId() {
@@ -44,6 +46,10 @@ public class Game {
 
     public DifficultyLevel getDifficultyLevel() {
         return difficultyLevel;
+    }
+
+    public int getMaxAttempts() {
+        return maxAttempts;
     }
 
     public boolean isFinished() {

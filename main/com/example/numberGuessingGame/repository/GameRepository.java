@@ -1,7 +1,8 @@
-package src.com.example.numberGuessingGame.repository;
+package src.main.com.example.numberGuessingGame.repository;
 
 import java.util.ArrayList;
-import src.com.example.numberGuessingGame.model.Game;
+
+import src.main.com.example.numberGuessingGame.model.Game;
 
 public class GameRepository {
 

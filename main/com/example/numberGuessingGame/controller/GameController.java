@@ -1,10 +1,11 @@
-package src.com.example.numberGuessingGame.controller;
+package src.main.com.example.numberGuessingGame.controller;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
-import src.com.example.numberGuessingGame.service.GameService;
-import src.com.example.numberGuessingGame.model.Game;
+import src.main.com.example.numberGuessingGame.model.Game;
+import src.main.com.example.numberGuessingGame.service.GameService;
+
+import java.util.ArrayList;
 
 public class GameController {
     private final GameService gameService;
@@ -39,6 +40,8 @@ public class GameController {
     }
 
     public void playGame() {
+        int attemptsCounter = 1;
+        boolean counterFlag = true;
         Game.DifficultyLevel difficultyLevel = difficultyLevelSelection();
         if (difficultyLevel == Game.DifficultyLevel.EASY) {
             System.out.println("You have selected Easy difficulty. Guess a number between 1 and 50.");
@@ -50,18 +53,26 @@ public class GameController {
 
         gameService.startNewGame(difficultyLevel);
 
-        while (true) {
+        while (attemptsCounter <= gameService.getCurrentGame().getMaxAttempts()){
             System.out.print("Enter your guess: ");
-            int guess = scan.nextInt();
-            scan.nextLine(); // Consume newline
+                int guess = scan.nextInt();
+                scan.nextLine(); // Consume newline
 
-            String result = gameService.makeGuess(guess);
-            System.out.println(result);
+                String result = gameService.makeGuess(guess);
+                System.out.println(result);
 
-            if (result.startsWith("Congratulations")) {
-                break;
+                if (result.startsWith("Congratulations")) {
+                    break;
+                } else {
+                    counterFlag = false;
+                    System.out.println("Remaining attempts: " + gameService.RemainAttempts());
+                }
+                attemptsCounter++;
             }
-    }
+
+        if (counterFlag) {
+            gameService.ResultDecision();
+        }
     }
 
     private void showHistory() {
