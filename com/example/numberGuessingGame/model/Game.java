@@ -5,14 +5,29 @@ public class Game {
     private int numberToGuess;
     private int numberOfAttempts;
     private boolean finished;
-    private String difficultyLevel;
+    private DifficultyLevel difficultyLevel;
 
-    public Game(int gameId, int numberToGuess, String difficultyLevel) {
+    public enum DifficultyLevel {
+        EASY,
+        MEDIUM,
+        HARD
+    }
+
+    public Game() {
+        this.gameId = 0;
+        this.numberToGuess = 0;
+        this.numberOfAttempts = 0;
+        this.finished = false;
+        this.difficultyLevel = DifficultyLevel.EASY;
+    }
+
+    public Game(int gameId, int numberToGuess, DifficultyLevel difficultyLevel) {
         this.gameId = gameId;
         this.numberToGuess = numberToGuess;
         this.numberOfAttempts = 0;
         this.finished = false;
         this.difficultyLevel = difficultyLevel;
+
     }
 
     public int getGameId() {
@@ -27,7 +42,7 @@ public class Game {
         return numberOfAttempts;
     }
 
-    public String getDifficultyLevel() {
+    public DifficultyLevel getDifficultyLevel() {
         return difficultyLevel;
     }
 

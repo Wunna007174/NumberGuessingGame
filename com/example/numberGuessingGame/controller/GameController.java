@@ -1,8 +1,10 @@
 package src.com.example.numberGuessingGame.controller;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import src.com.example.numberGuessingGame.service.GameService;
+import src.com.example.numberGuessingGame.model.Game;
 
 public class GameController {
     private final GameService gameService;
@@ -37,12 +39,12 @@ public class GameController {
     }
 
     public void playGame() {
-        String difficultyLevel = difficultyLevelSelection();
-        if (difficultyLevel == "Easy") {
+        Game.DifficultyLevel difficultyLevel = difficultyLevelSelection();
+        if (difficultyLevel == Game.DifficultyLevel.EASY) {
             System.out.println("You have selected Easy difficulty. Guess a number between 1 and 50.");
-        } else if (difficultyLevel == "Medium") {
+        } else if (difficultyLevel == Game.DifficultyLevel.MEDIUM) {
             System.out.println("You have selected Medium difficulty. Guess a number between 1 and 100.");
-        } else if (difficultyLevel == "Hard") {
+        } else if (difficultyLevel == Game.DifficultyLevel.HARD) {
             System.out.println("You have selected Hard difficulty. Guess a number between 1 and 200.");
         }
 
@@ -65,11 +67,18 @@ public class GameController {
     private void showHistory() {
          System.out.println("\n================================"); 
          System.out.println(" GAME HISTORY"); 
-         System.out.println("================================"); 
-         gameService.showGames();
+         System.out.println("================================");
+            ArrayList<Game> games = gameService.getGames();
+            for (Game game : games) {
+                System.out.println("Game ID: " + game.getGameId() + 
+                                ", Finished: " + game.isFinished() +
+                                ", Correct Number: " + game.getNumberToGuess() +
+                                ", Attempts: " + game.getNumberOfAttempts() +
+                                ", Difficulty Level: " + game.getDifficultyLevel());
+            }
     }
 
-    private String difficultyLevelSelection() {
+    private Game.DifficultyLevel difficultyLevelSelection() {
         System.out.println("Select difficulty level: ");
         System.out.println("1. Easy");
         System.out.println("2. Medium");
@@ -81,14 +90,14 @@ public class GameController {
 
         switch (choice) {
             case 1:
-                return "Easy";
+                return Game.DifficultyLevel.EASY;
             case 2:
-                return "Medium";
+                return Game.DifficultyLevel.MEDIUM;
             case 3:
-                return "Hard";
+                return Game.DifficultyLevel.HARD;
             default:
                 System.out.println("Invalid choice. Defaulting to Easy.");
-                return "Easy";
+                return Game.DifficultyLevel.EASY;
         }
     }
 }

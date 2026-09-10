@@ -17,13 +17,7 @@ public class GameRepository {
         return currentGame;
     }
 
-    public void showGames() {
-        for (Game game : games) {
-            System.out.println("Game ID: " + game.getGameId() + 
-                            ", Finished: " + game.isFinished() +
-                            ", Correct Number: " + game.getNumberToGuess() +
-                            ", Attempts: " + game.getNumberOfAttempts() +
-                            ", Difficulty Level: " + game.getDifficultyLevel());
-        }
+    public ArrayList<Game> getGames() {
+        return games;
     }
 }

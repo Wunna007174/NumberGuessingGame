@@ -1,5 +1,6 @@
 package src.com.example.numberGuessingGame.service;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import src.com.example.numberGuessingGame.model.Game;
@@ -17,13 +18,13 @@ public class GameService {
         random = new Random();
     }
 
-    public void startNewGame(String difficultyLevel) {
+    public void startNewGame(Game.DifficultyLevel difficultyLevel) {
         int numberToGuess;
-            if (difficultyLevel == "Easy" || difficultyLevel == null || difficultyLevel.isEmpty()) {
+            if (difficultyLevel == Game.DifficultyLevel.EASY || difficultyLevel == null) {
                 numberToGuess = random.nextInt(50) + 1;
-            } else if (difficultyLevel == "Medium") {
+            } else if (difficultyLevel == Game.DifficultyLevel.MEDIUM) {
                 numberToGuess = random.nextInt(100) + 1;
-            } else if (difficultyLevel == "Hard") {
+            } else if (difficultyLevel == Game.DifficultyLevel.HARD) {
                 numberToGuess = random.nextInt(200) + 1;
             } else {
                 throw new IllegalArgumentException("Invalid difficulty level: " + difficultyLevel);
@@ -50,9 +51,7 @@ public class GameService {
         }
     }
 
-    public void showGames() {
-        gameRepository.showGames();
+    public ArrayList<Game> getGames() {
+        return gameRepository.getGames();
     }
-
-
 }
