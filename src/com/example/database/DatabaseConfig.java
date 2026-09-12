@@ -5,36 +5,33 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DatabaseConfig {
-    
+
     private final Properties properties = new Properties();
 
     public DatabaseConfig() {
-        try (InputStream input = getClass()
-                .getClassLoader()
+        try (InputStream input = DatabaseConfig.class
                 .getResourceAsStream("database.properties")) {
-                    
-                    if (input == null) {
-                        throw new RuntimeException("database.properties not found");
-                    }
 
-                    properties.load(input);
-
-                } catch (IOException e) {
-                    throw new RuntimeException("Failed to load database.properties", e);
-                }
-
+            if (input == null) {
+                throw new RuntimeException("database.properties not found");
             }
 
-                public String getUrl() {
-                    return properties.getProperty("db.url");
-                }
+            properties.load(input);
 
-                public String getUsername() {
-                    return properties.getProperty("db.username");
-                }
-
-                public String getPassword() {
-                    return properties.getProperty("db.password");
-                }
-
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load database.properties", e);
+        }
     }
+
+    public String getUrl() {
+        return properties.getProperty("db.url");
+    }
+
+    public String getUsername() {
+        return properties.getProperty("db.username");
+    }
+
+    public String getPassword() {
+        return properties.getProperty("db.password");
+    }
+}
