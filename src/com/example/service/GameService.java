@@ -1,24 +1,25 @@
 package com.example.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import com.example.model.Game;
 import com.example.repository.GameRepository;
 
-public class GameService {
+public class GameService{
     private final GameRepository gameRepository;
     private final Random random;
     private Game game;
-
-    private int gameIdCounter = 1;
 
     public GameService() { 
         gameRepository = new GameRepository(); 
         random = new Random();
     }
 
-    public void startNewGame(Game.DifficultyLevel difficultyLevel) {
+
+    public void startNewGame(Game.DifficultyLevel difficultyLevel) throws SQLException{
+        int gameIdCounter = increaseingGameId();
         int maxAttempts = 0;
         int numberToGuess = 0;
             if (difficultyLevel == Game.DifficultyLevel.EASY || difficultyLevel == null) {
@@ -34,7 +35,6 @@ public class GameService {
                 throw new IllegalArgumentException("Invalid difficulty level: " + difficultyLevel);
             }
         game = new Game(gameIdCounter, numberToGuess, difficultyLevel, maxAttempts);
-        gameIdCounter++;
     }
 
     public String makeGuess(int guess) {
@@ -87,6 +87,11 @@ public class GameService {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int increaseingGameId() throws SQLException{
+        int gameCounter = gameRepository.getLatestGameId();
+        return gameCounter++;
     }
 
 }

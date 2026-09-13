@@ -64,12 +64,13 @@ public class Game {
     public boolean isFinished() {
         return finished;
     }
-
+    
+    public void finishedGame() {
+        finished  = true;
+    }
+    
     public void incrementAttempts() {
         numberOfAttempts++;
     }
 
-    public void finishedGame() {
-        finished  = true;
-    }
 }

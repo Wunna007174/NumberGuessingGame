@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.example.model.Game;
 import com.example.service.GameService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GameController {
@@ -16,7 +17,7 @@ public class GameController {
         scan = new Scanner(System.in);
     }
 
-    public void start() {
+    public void start() throws SQLException {
         System.out.println("================================");
         System.out.println("        Number Guessing Game");
         System.out.println("================================");
@@ -39,7 +40,7 @@ public class GameController {
         scan.close();
     }
 
-    public void playGame() {
+    public void playGame() throws SQLException{
         int attemptsCounter = 1;
         boolean counterFlag = true;
         boolean isGameEnded = false;

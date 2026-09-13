@@ -26,8 +26,8 @@ public class GameRepository {
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)){
                 statement.setInt(1, game.getGameId());
-                statement.setInt(2, game.getNumberToGuess());
-                statement.setBoolean(3, game.isFinished());
+                statement.setBoolean(2, game.isFinished());
+                statement.setInt(3, game.getNumberToGuess());
                 statement.setString(4, game.getDifficultyLevel().name());
 
                 statement.executeUpdate();
@@ -59,6 +59,14 @@ public class GameRepository {
                 e.printStackTrace();
                  }
             return games;
+        }
+
+        public int getLatestGameId() throws SQLException{
+                List<Game> games = getGamesFromDB();
+            
+                int size = games.size();
+
+            return size;
         }
 
 }
